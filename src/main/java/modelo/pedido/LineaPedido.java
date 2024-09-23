@@ -1,4 +1,6 @@
 package modelo.pedido;
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.producto.Producto;
 
@@ -6,15 +8,19 @@ public class LineaPedido {
     private int id;
     private int cantidad;
     private int pedido_id;
+    private int producto_id;
     
-    private Producto producto;
+    private List<Producto> productos;
 
-    public LineaPedido(int id, int cantidad, int pedido_id, Producto producto) {
+    public LineaPedido(int id, int cantidad, int pedido_id, int producto_id) {
         this.id = id;
         this.cantidad = cantidad;
         this.pedido_id=pedido_id;
-        this.producto=producto;
+        this.productos=new ArrayList<>();
+        
     }
+
+    
 
     public int getId() {
         return id;
@@ -24,13 +30,7 @@ public class LineaPedido {
         this.id = id;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
+    
 
     public int getCantidad() {
         return cantidad;
@@ -47,6 +47,30 @@ public class LineaPedido {
 
     public void setPedido_id(int pedido_id) {
         this.pedido_id = pedido_id;
+    }
+
+    
+
+    public int getProducto_id() {
+        return producto_id;
+    }
+
+
+
+    public void setProducto_id(int producto_id) {
+        this.producto_id = producto_id;
+    }
+
+
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
     
 

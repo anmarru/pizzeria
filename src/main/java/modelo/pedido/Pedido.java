@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import modelo.producto.Producto;
-
 public class Pedido implements Pagable{
 
     private Pagable metodoDePago;
-    private List<Producto> lineasPedido;
+    private List<LineaPedido> lineasPedido;// un pedido puede tener varias lineas de pedido
     private int id;
     private Date fecha;
     private float precioTotal;
@@ -23,6 +21,10 @@ public class Pedido implements Pagable{
         this.lineasPedido= new ArrayList<>();
         this.cliente_id= cliente_id;
         this.estado= EstadoPedido.PENDIENTE;
+    }
+
+    public void realizarLineaPedido(LineaPedido pedido){
+        lineasPedido.add(pedido);
     }
 
     public int getId() {
@@ -61,11 +63,11 @@ public class Pedido implements Pagable{
 
 
 
-    public List<Producto> getLineasPedido() {
+    public List<LineaPedido> getLineasPedido() {
         return lineasPedido;
     }
 
-    public void setLineasPedido(List<Producto> lineasPedido) {
+    public void setLineasPedido(List<LineaPedido> lineasPedido) {
         this.lineasPedido = lineasPedido;
     }
 
@@ -99,10 +101,16 @@ public class Pedido implements Pagable{
     }
 
     
-    public void agregarLineaPedido(Producto producto){
+    public void agregarLineaPedido(LineaPedido LineaPedido){
 
-        lineasPedido.add(producto);
+        lineasPedido.add(LineaPedido);
         
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido [metodoDePago=" + metodoDePago + ", lineasPedido=" + lineasPedido + ", id=" + id + ", fecha="
+                + fecha + ", precioTotal=" + precioTotal + ", cliente_id=" + cliente_id + ", estado=" + estado + "]";
     }
 
     

@@ -13,7 +13,7 @@ public class ControladorPedido {
 
      public void agregarLineaPedido(Producto producto, int cantidad){
          if (pedidoactual== null){
-             pedidoactual.agregarLineaPedido(producto);
+          //  pedidoactual.agregarLineaPedido(producto);
          }
 
 
