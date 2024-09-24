@@ -39,18 +39,7 @@ public abstract class Producto {
         this.precio = precio;
     }
 
-    public List<Producto> lista_productos(){
-
-        ArrayList<Producto> nombre_productos=new ArrayList<>();
-
-       // Bebida cocacola= new Bebida(id, nombre, precio, Size.grande, id);
-       // nombre_productos.add(new Bebida(1,"Cocacola",Size.grande, 2));
-       //nombre_productos.add(cocacola);
-        
-        return nombre_productos;
-        
-    }
-
+    
 
     
 }

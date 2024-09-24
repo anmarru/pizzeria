@@ -30,6 +30,7 @@ public class Pasta extends Producto {
         this.producto_id = producto_id;
     }
     public int getIngredientes_id() {
+
         return ingredientes_id;
     }
     public void setIngredientes_id(int ingredientes_id) {

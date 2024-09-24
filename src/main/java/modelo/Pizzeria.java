@@ -7,6 +7,10 @@ import java.util.List;
 import modelo.cliente.Cliente;
 import modelo.pedido.EstadoPedido;
 import modelo.pedido.Pedido;
+import modelo.pedido.Size;
+import modelo.producto.Bebida;
+import modelo.producto.Pasta;
+import modelo.producto.Producto;
 
 public class Pizzeria {
     public static void main(String[] args) {
@@ -24,7 +28,23 @@ public class Pizzeria {
         Cliente cliente = clientes.get(0); // Seleccionamos a Ana
         Pedido pedido = pedidos.get(0); // Seleccionamos el primer pedido
         
-        // Verificar contraseña
+
+       /* public List<Producto> lista_productos(){
+
+        ArrayList<Producto> nombre_productos=new ArrayList<>();
+
+        nombre_productos.add(new Bebida(1, "agua", 1.50, Size.pequeña, 1));
+        nombre_productos.add(new Bebida(2,"Cocacola",2.0, Size.grande, 2));
+        nombre_productos.add(new Bebida(3, "cerveza", 3.00,Size.mediana, 3));
+        
+        nombre_productos.add(new Pasta(1, "carbonara", 14.0, 4,1 ));
+
+        return nombre_productos;
+        
+    }
+ */
+
+        /* // Verificar contraseña
         if (cliente.verificarPassword("0000")) {
             cliente.realizarPedido(pedido);
             
@@ -47,6 +67,6 @@ public class Pizzeria {
             System.out.println(pedidoDeLuis);
         } else {
             System.out.println("Contraseña incorrecta.");
-        }
+        } */
     }
 }

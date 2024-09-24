@@ -8,14 +8,14 @@ public class Ingrediente {
     private List<String> alergenos;
     private int id;
 
-    // Constructor para inicializar los atributos
+    
     public Ingrediente(String nombre, List<String> alergenos, int id) {
         this.nombre = nombre;
         this.alergenos = alergenos;
         this.id = id;
     }
 
-    // Getters y setters
+    
     public String getNombre() {
         return nombre;
     }
@@ -40,7 +40,7 @@ public class Ingrediente {
         this.id = id;
     }
 
-    // Método toString para representar el objeto como una cadena de texto
+    
     @Override
     public String toString() {
         return "Ingrediente{" +
