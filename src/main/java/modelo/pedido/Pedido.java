@@ -17,7 +17,7 @@ public class Pedido implements Pagable{
     public Pedido(int id, Date fecha, float precioTotal, EstadoPedido estado,int cliente_id) {
         this.id = id;
         this.fecha = new Date();
-        this.precioTotal = precioTotal;
+        this.precioTotal =0;
         this.lineasPedido= new ArrayList<>();
         this.cliente_id= cliente_id;
         this.estado= EstadoPedido.PENDIENTE;

@@ -1,5 +1,5 @@
 package modelo.pedido;
 
-public enum Size {
-    grande, mediana, pequeña
+public enum SIZE {
+   GRANDE,MEDIANA, PEQUEÑA
 }

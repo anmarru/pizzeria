@@ -1,25 +1,25 @@
 package modelo.producto;
 
-import modelo.pedido.Size;
+import modelo.pedido.SIZE;
 
 public class Bebida extends Producto{
     
     
-    public Size SIZE;
+    public SIZE size;
     private int producto_id;// bebida esta relacionada con el id del producto
     
-    public Bebida(int id, String nombre, double precio, Size sIZE, int producto_id) {
+    public Bebida(int id, String nombre, double precio, SIZE size, int producto_id) {
         super(id, nombre, precio);
-        SIZE = sIZE;
+        size = size;
         this.producto_id = producto_id;
     }
 
-    public Size getSIZE() {
-        return SIZE;
+    public SIZE getsize() {
+        return size;
     }
 
-    public void setSIZE(Size sIZE) {
-        SIZE = sIZE;
+    public void setsize(SIZE size) {
+        size = size;
     }
 
     public int getProducto_id() {

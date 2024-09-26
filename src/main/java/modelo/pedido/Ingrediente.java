@@ -1,18 +1,23 @@
 package modelo.pedido;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import modelo.producto.Producto;
 
 public class Ingrediente {
     
     private String nombre;
     private List<String> alergenos;
+    private List <Producto> productos;
     private int id;
 
     
-    public Ingrediente(String nombre, List<String> alergenos, int id) {
+    public Ingrediente(String nombre, List<String> alergenos, int id,List <Producto> productos) {
         this.nombre = nombre;
-        this.alergenos = alergenos;
+        this.alergenos = new ArrayList<>();
         this.id = id;
+        this.productos=new ArrayList<>();
     }
 
     
@@ -23,6 +28,9 @@ public class Ingrediente {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    
+
 
     public List<String> getAlergenos() {
         return alergenos;
@@ -40,6 +48,14 @@ public class Ingrediente {
         this.id = id;
     }
 
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
     
     @Override
     public String toString() {
@@ -49,4 +65,7 @@ public class Ingrediente {
                 ", alergenos=" + alergenos +
                 '}';
     }
+
+    
+
 }

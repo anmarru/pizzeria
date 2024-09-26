@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.pedido.Pedido;
-import modelo.pedido.Size;
+import modelo.pedido.SIZE;
 import modelo.producto.Bebida;
 import modelo.producto.Pizza;
 import modelo.producto.Producto;
