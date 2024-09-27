@@ -6,32 +6,46 @@ import java.util.List;
 
 public class Pedido implements Pagable{
 
-    private Pagable metodoDePago;
-    private List<LineaPedido> lineasPedido;// un pedido puede tener varias lineas de pedido
+    private List<LineaPedido> lineasPedido;
     private int id;
     private Date fecha;
     private float precioTotal;
-    private int cliente_id;
     private EstadoPedido estado;
+    private int contador_pedido=1;
 
-    public Pedido(int id, Date fecha, float precioTotal, EstadoPedido estado,int cliente_id) {
-        this.id = id;
+    public Pedido( EstadoPedido estado) {
+        this.id = contador_pedido;
         this.fecha = new Date();
         this.precioTotal =0;
         this.lineasPedido= new ArrayList<>();
-        this.cliente_id= cliente_id;
         this.estado= EstadoPedido.PENDIENTE;
     }
+    
+    
+    
+    @Override
+    public String toString() {
+        return "Pedido [id=" + id + ", fecha=" + fecha + ", precioTotal=" + precioTotal + ", estado=" + estado + "]";
+    }
 
-    public void realizarLineaPedido(LineaPedido pedido){
-        lineasPedido.add(pedido);
+
+    public void agregarLineaPedido(LineaPedido lineaPedido){
+        lineasPedido.add(lineaPedido);
+        this.precioTotal+= lineaPedido.getCantidad() * lineaPedido.getProducto().getPrecio();
+    
+    }
+
+    public List<LineaPedido> getLineasPedido() {
+        return lineasPedido;
+    }
+
+    public void setLineasPedido(List<LineaPedido> lineasPedido) {
+        this.lineasPedido = lineasPedido;
     }
 
     public int getId() {
         return id;
     }
-
-    
 
     public void setId(int id) {
         this.id = id;
@@ -61,57 +75,23 @@ public class Pedido implements Pagable{
         this.estado = estado;
     }
 
-
-
-    public List<LineaPedido> getLineasPedido() {
-        return lineasPedido;
+    public int getContador_pedido() {
+        return contador_pedido;
     }
 
-    public void setLineasPedido(List<LineaPedido> lineasPedido) {
-        this.lineasPedido = lineasPedido;
+    public void setContador_pedido(int contador_pedido) {
+        this.contador_pedido = contador_pedido;
     }
 
-    public int getCliente_id() {
-        return cliente_id;
-    }
 
-    public void setCliente_id(int cliente_id) {
-        this.cliente_id = cliente_id;
-    }
-
-    public Pagable getMetodoDePago() {
-        return metodoDePago;
-    }
-
-    public void setMetodoDePago(Pagable metodoDePago) {
-        this.metodoDePago = metodoDePago;
-    }
-    
-    
-     //si el pedido esta entregado se finaliza
-    public void finalizar(){
-        this.estado= EstadoPedido.ENTREGADO;
-
-        System.out.println("pedido finalizado");
-    }
 
     @Override
     public void pagar(double cantidad) {
-        System.out.println("pago realizado "+ cantidad);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'pagar'");
     }
 
     
-    public void agregarLineaPedido(LineaPedido LineaPedido){
-
-        lineasPedido.add(LineaPedido);
-        
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido [metodoDePago=" + metodoDePago + ", lineasPedido=" + lineasPedido + ", id=" + id + ", fecha="
-                + fecha + ", precioTotal=" + precioTotal + ", cliente_id=" + cliente_id + ", estado=" + estado + "]";
-    }
 
     
 }

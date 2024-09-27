@@ -1,37 +1,45 @@
 package modelo.producto;
 
-import modelo.pedido.SIZE;
+import java.util.List;
+
+import modelo.pedido.Ingrediente;
 
 public class Pizza  extends Producto{
     
-    public SIZE size;
+    private Size size;
 
-    private int ingredientes_id;//se relaciona con el id de ingredientes
+    private List<Ingrediente> ingredientes;
 
-    public Pizza(int id, String nombre, double precio, SIZE size,  int ingredientes_id) {
+    public Pizza(int id, String nombre, double precio, Size size,  List<Ingrediente> ingredientes) {
         super(id, nombre, precio);
         this.size = size;
       
-        this.ingredientes_id= ingredientes_id;
+        this.ingredientes=ingredientes;
     }
 
-    public SIZE getsize() {
+    public Size getSize() {
         return size;
     }
 
-    public void setSIZE(SIZE size) {
-        size = size;
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza [size=" + size + ", ingredientes=" + ingredientes + "]";
     }
 
     
-
-    public int getIngredientes_id() {
-        return ingredientes_id;
-    }
-
-    public void setIngredientes_id(int ingredientes_id) {
-        this.ingredientes_id = ingredientes_id;
-    }
+    
     
     
 }

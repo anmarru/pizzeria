@@ -3,10 +3,11 @@ package modelo.cliente;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.pedido.Pagable;
 import modelo.pedido.Pedido;
 
 
-public class Cliente {
+public class Cliente implements Pagable {
     
     private int id;
     private String dni;
@@ -16,7 +17,7 @@ public class Cliente {
     private String email;
     private String password;
     
-    // Relación uno a muchos: un cliente tiene muchos pedidos
+    
     private List<Pedido> pedidos;
 
     public Cliente(int id, String dni, String nombre, String direccion, String telefono, String email,
@@ -31,12 +32,20 @@ public class Cliente {
         this.pedidos = new ArrayList<>();
     }
 
-    public void realizarPedido(Pedido pedido){
-        pedidos.add(pedido);  // El cliente realiza un pedido y lo agregamos a la lista de pedidos
-    }
 
     public boolean verificarPassword(String password){
         return this.password.equals(password);
+    }
+
+    @Override
+    public void pagar(double cantidad) {
+        System.out.println("HACER PAGO");
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono="
+                + telefono + ", email=" + email + ", password=" + password + ", pedidos=" + pedidos + "]";
     }
 
     public int getId() {
@@ -103,11 +112,10 @@ public class Cliente {
         this.pedidos = pedidos;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono="
-                + telefono + ", email=" + email + ", password=" + password + ", pedidos=" + pedidos + "]";
-    }
+
+
+
+
 
     
 }

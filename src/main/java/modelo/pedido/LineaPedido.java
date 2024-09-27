@@ -1,77 +1,74 @@
 package modelo.pedido;
-import java.util.ArrayList;
-import java.util.List;
-
 import modelo.producto.Producto;
 
 public class LineaPedido {
     private int id;
     private int cantidad;
-    private int pedido_id;
-    private int producto_id;
+    private int contador_lineas;
+    private Producto producto;
     
-    private List<Producto> productos;
 
-    public LineaPedido(int id, int cantidad, int pedido_id, int producto_id) {
-        this.id = id;
+    public LineaPedido(int cantidad, Producto producto) {
+        this.id = contador_lineas++;
         this.cantidad = cantidad;
-        this.pedido_id=pedido_id;
-        this.productos=new ArrayList<>();
+        this.producto=producto;
         
     }
 
+
     
+
+    @Override
+    public String toString() {
+        return "LineaPedido [id=" + id + ", cantidad=" + cantidad + ", producto=" + producto + "]";
+    }
+
+
+
 
     public int getId() {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
 
-    
 
     public int getCantidad() {
         return cantidad;
     }
 
+
     public void setCantidad(int cantidad) {
-        this.cantidad= cantidad;
-        
+        this.cantidad = cantidad;
     }
 
-    public int getPedido_id() {
-        return pedido_id;
+
+    public int getContador_lineas() {
+        return contador_lineas;
     }
 
-    public void setPedido_id(int pedido_id) {
-        this.pedido_id = pedido_id;
+
+    public void setContador_lineas(int contador_lineas) {
+        this.contador_lineas = contador_lineas;
+    }
+
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     
+    
 
-    public int getProducto_id() {
-        return producto_id;
-    }
-
-
-
-    public void setProducto_id(int producto_id) {
-        this.producto_id = producto_id;
-    }
-
-
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
+    
     
 
     

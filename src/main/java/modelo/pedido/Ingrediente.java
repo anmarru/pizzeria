@@ -1,6 +1,5 @@
 package modelo.pedido;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import modelo.producto.Producto;
@@ -13,11 +12,11 @@ public class Ingrediente {
     private int id;
 
     
-    public Ingrediente(String nombre, List<String> alergenos, int id,List <Producto> productos) {
+    public Ingrediente(String nombre, List<String> alergenos) {
         this.nombre = nombre;
-        this.alergenos = new ArrayList<>();
+        this.alergenos = alergenos;
         this.id = id;
-        this.productos=new ArrayList<>();
+        this.productos= productos;
     }
 
     
