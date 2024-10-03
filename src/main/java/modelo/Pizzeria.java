@@ -34,14 +34,15 @@ public class Pizzeria {
         controladorPedido.agregarLineaPedido(new Pizza(1, "hawai",8.5,modelo.producto.Size.MEDIANA,lista_ingredientes), 2);
         controladorPedido.agregarLineaPedido(new Bebida(2, "agua", 1.5, modelo.producto.Size.GRANDE), 2);
         
-        controladorPedido.entregarPedido();
-        System.out.println(controladorCilente.getCliente_Actual());
+    
         
         controladorPedido.getPedido().getLineasPedido().forEach(pedidos-> System.out.println(pedidos));
         Pagable pagar= new PagarTarjeta();
     
+        System.out.println(controladorCilente.getCliente_Actual());
         controladorPedido.finalizarPedido(pagar);
-
+        controladorPedido.entregarPedido();
+        
 
 
 
