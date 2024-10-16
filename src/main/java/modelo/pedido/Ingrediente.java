@@ -9,9 +9,11 @@ public class Ingrediente {
     private String nombre;
     private List<String> alergenos;
     private List <Producto> productos;
-    private int id;
+    private long id;
 
-    
+    public Ingrediente() {
+    }
+
     public Ingrediente(String nombre, List<String> alergenos) {
         this.nombre = nombre;
         this.alergenos = alergenos;
@@ -39,7 +41,7 @@ public class Ingrediente {
         this.alergenos = alergenos;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

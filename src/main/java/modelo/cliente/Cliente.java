@@ -9,7 +9,7 @@ import modelo.pedido.Pedido;
 
 public class Cliente implements Pagable {
     
-    private int id;
+    private long id;
     private String dni;
     private String nombre;
     private String direccion;
@@ -20,9 +20,12 @@ public class Cliente implements Pagable {
     
     private List<Pedido> pedidos;
 
-    public Cliente(int id, String dni, String nombre, String direccion, String telefono, String email,
-            String password) {
-        this.id = id;
+    public Cliente() {
+    }
+
+    public Cliente( String dni, String nombre, String direccion, String telefono, String email,
+                   String password) {
+
         this.dni = dni;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -48,11 +51,9 @@ public class Cliente implements Pagable {
                 + telefono + ", email=" + email + ", password=" + password + ", pedidos=" + pedidos + "]";
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
+
+    public void setId(long id) {
         this.id = id;
     }
 

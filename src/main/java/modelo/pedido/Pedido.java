@@ -7,14 +7,14 @@ import java.util.List;
 public class Pedido implements Pagable{
 
     private List<LineaPedido> lineasPedido;
-    private int id;
+    private long id;
     private Date fecha;
     private float precioTotal;
     private EstadoPedido estado;
-    private int contador_pedido=1;
+
 
     public Pedido( EstadoPedido estado) {
-        this.id = contador_pedido;
+
         this.fecha = new Date();
         this.precioTotal =0;
         this.lineasPedido= new ArrayList<>();
@@ -43,7 +43,7 @@ public class Pedido implements Pagable{
         this.lineasPedido = lineasPedido;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -75,13 +75,7 @@ public class Pedido implements Pagable{
         this.estado = estado;
     }
 
-    public int getContador_pedido() {
-        return contador_pedido;
-    }
 
-    public void setContador_pedido(int contador_pedido) {
-        this.contador_pedido = contador_pedido;
-    }
 
 
 

@@ -17,6 +17,7 @@ public class ControladorPedido {
     }
     
     public void finalizarPedido(Pagable pagable){
+
         if(cliente==null){
             System.out.println("NO HAY USUARIO ");
             return;
@@ -25,13 +26,14 @@ public class ControladorPedido {
             System.out.println("No hay pedido ");
             return;
         }
-        pedido.setEstado(EstadoPedido.ENTREGADO);
+        pedido.setEstado(EstadoPedido.FINALIZADO);
         System.out.println("EL ESTADO DEL PEDIDO ES: "+pedido.getEstado());
 
         pagable.pagar(pedido.getPrecioTotal());
 
     }
-    
+
+
 
     public void agregarLineaPedido(Producto producto, int cantidad) {
         if (cliente == null) {

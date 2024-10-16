@@ -8,7 +8,7 @@ import modelo.producto.Producto;
 
 public class ControladorCilente {
     
-    private static Cliente cliente_Actual;
+    private static Cliente clienteActual;
     private List<Cliente> listaClientes;
     private ControladorPedido controladorPedido;
 
@@ -19,13 +19,13 @@ public class ControladorCilente {
 
         /* listaClientes.add(new Cliente(1,"14525487w","andrea", "la paz 4","655489985" ,"a@gmail.com","1111"));
         listaClientes.add(new Cliente(2, "5246987u", "nicolay", "castillo 11", "689574123", "n@gmail.com", "0000")); */
-        cliente_Actual=null;
+        clienteActual=null;
     }
 
 
     public void agregarLieaPedido(Producto producto, int cantidad){
 
-        if(cliente_Actual!=null){
+        if(clienteActual!=null){
             this.controladorPedido.agregarLineaPedido(producto, cantidad);
         }else{
             System.out.println("NO SE PUEDE AGREGAR PEDIDO");
@@ -44,7 +44,7 @@ public class ControladorCilente {
             }
         }
         if(!clienteExistente){
-            listaClientes.add(new Cliente(id,dni,nombre, direccion, telefono, email, password));
+            listaClientes.add(new Cliente(dni,nombre, direccion, telefono, email, password));
             System.out.println("CLIENTE REGISTRADO ");
         }else{
             System.out.println("EL CLIENTE YA EXISTE ");
@@ -56,13 +56,13 @@ public class ControladorCilente {
         
         for (Cliente cliente : listaClientes) {
             if(cliente.getDni().equals(dni)&& cliente.getNombre().equals(nombre)&& cliente.getPassword().equals(password)){
-                cliente_Actual=cliente;
+                clienteActual=cliente;
             }
         }
 
-        if(cliente_Actual != null){
+        if(clienteActual != null){
             System.out.println("AUTENCICACION EXITOSA ");
-            controladorPedido= new ControladorPedido(cliente_Actual);
+            controladorPedido= new ControladorPedido(clienteActual);
         }else{
             System.out.println("EL CLIENTE NO ESTA REGISTRADO O LA INFORMACION ES INCORRECTA");
         }
@@ -70,7 +70,7 @@ public class ControladorCilente {
 
 
     public static Cliente getCliente_Actual() {
-        return cliente_Actual;
+        return clienteActual;
     }
 
     
