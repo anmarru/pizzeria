@@ -8,7 +8,6 @@ public class Ingrediente {
     
     private String nombre;
     private List<String> alergenos;
-    private List <Producto> productos;
     private long id;
 
     public Ingrediente() {
@@ -18,7 +17,7 @@ public class Ingrediente {
         this.nombre = nombre;
         this.alergenos = alergenos;
         this.id = id;
-        this.productos= productos;
+
     }
 
     
@@ -49,14 +48,7 @@ public class Ingrediente {
         this.id = id;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
 
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
     
     @Override
     public String toString() {

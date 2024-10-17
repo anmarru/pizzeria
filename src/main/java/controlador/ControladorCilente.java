@@ -34,7 +34,7 @@ public class ControladorCilente {
     }
 
     public void registrarCliente(int id, String dni, String nombre, String direccion, String telefono, String email,
-    String password){
+    String password, boolean esAdministrador){
         boolean clienteExistente=false;
 
         for (Cliente cliente2 : listaClientes) {
@@ -44,7 +44,7 @@ public class ControladorCilente {
             }
         }
         if(!clienteExistente){
-            listaClientes.add(new Cliente(dni,nombre, direccion, telefono, email, password));
+            listaClientes.add(new Cliente(id,dni,nombre, direccion, telefono, email, password,esAdministrador));
             System.out.println("CLIENTE REGISTRADO ");
         }else{
             System.out.println("EL CLIENTE YA EXISTE ");

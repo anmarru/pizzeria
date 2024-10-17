@@ -5,20 +5,23 @@ import java.util.List;
 
 import controlador.ControladorCilente;
 import controlador.ControladorPedido;
+import modelo.cliente.Cliente;
 import modelo.pedido.Ingrediente;
 import modelo.pedido.Pagable;
 import modelo.pedido.PagarTarjeta;
 import modelo.producto.Bebida;
 import modelo.producto.Pizza;
+import utilidades.GestorDeArchivo;
+import utilidades.ImportarXML;
 
 public class Pizzeria {
     public static void main(String[] args) {
 
-        ControladorCilente controladorCilente= new ControladorCilente();
+       /* ControladorCilente controladorCilente= new ControladorCilente();
         ControladorPedido controladorPedido= new ControladorPedido(null);
 
 
-        controladorCilente.registrarCliente(1, "54236985p", "Ana", "Calle 456", "456213698", "ana@gmail.com", "5555");
+        controladorCilente.registrarCliente(1, "54236985p", "Ana", "Calle 456", "456213698", "ana@gmail.com", "5555", true);
        // controladorCilente.registrarCliente(2, "12345678a", "Luis", "Calle 123", "123456789", "luis@gmail.com", "1234"); 
         
         controladorCilente.autenticarCliente("Ana", "5555","54236985p" );
@@ -31,8 +34,8 @@ public class Pizzeria {
         lista_ingredientes.add(new Ingrediente("champiñones",List.of()));
         
         
-        controladorPedido.agregarLineaPedido(new Pizza(1, "hawai",8.5,modelo.producto.Size.MEDIANA,lista_ingredientes), 2);
-        controladorPedido.agregarLineaPedido(new Bebida(2, "agua", 1.5, modelo.producto.Size.GRANDE), 2);
+        //controladorPedido.agregarLineaPedido(new Pizza(1, "hawai",8.5,modelo.producto.Size.MEDIANA,lista_ingredientes), 2);
+        //controladorPedido.agregarLineaPedido(new Bebida(2, "agua", 1.5, modelo.producto.Size.GRANDE), 2);
         
     
         
@@ -41,15 +44,33 @@ public class Pizzeria {
     
         System.out.println(controladorCilente.getCliente_Actual());
         controladorPedido.finalizarPedido(pagar);
-        controladorPedido.entregarPedido();
+        controladorPedido.entregarPedido();*/
         
 
+    //FUNCION LEER CLIENTES
+        List<Cliente> clientes= GestorDeArchivo.leerCliente();
+        clientes.forEach(System.out::println);
 
+    //FUNCION EXPONER CLIENTESXML
+        List<Cliente> listaClientes= new ArrayList<>();
+        listaClientes.add(new Cliente(1,"5235474Q","nico","calle x 12","652358896","nico@gmail.com","14563A", true));
+        listaClientes.add(new Cliente(2, "22203344F", "María", "C/Sol 5", "678954321", "m.gonzalez@correo.com", "23456B", false));
+        listaClientes.add(new Cliente(3, "33301234A", "Carlos", "Av. Libertad 3", "690123456", "c.lopez@correo.com", "34567C", true));
 
+        String nombreArchivo= "clientes.xml";
+        GestorDeArchivo.exportarClienteAxml(listaClientes,nombreArchivo);
 
-
-
-
+    //Importar xml a objetos cliente
+        String rutaArchivoXML="clientes.xml";
+        //creo mi lista para almacenar los obj importados del xml
+        List<Cliente> listaClientes2= ImportarXML.importarClientesDesdeArchivoXML(rutaArchivoXML);
+        if(listaClientes2 !=null){
+            for(Cliente c: listaClientes2){
+                System.out.println(c);
+            }
+        }else {
+            System.out.println("no se pudieron importar los clientes ");
+        }
 
 
 
