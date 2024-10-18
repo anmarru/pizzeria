@@ -6,6 +6,7 @@ import modelo.cliente.Clientes;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -49,7 +50,7 @@ public class GestorDeArchivo {
         return  listaCliente;
     }
 
-    public static void exportarClienteAxml(List<Cliente>listaClientes, String nombreArchivo){
+    public static void exportarClienteAxml(List<Cliente> listaClientes, String nombreArchivo){
         try{
             //contiene mi lista de clientes
             Clientes cliente=new Clientes(listaClientes);
@@ -66,6 +67,26 @@ public class GestorDeArchivo {
             System.out.println(("error "+e.getMessage()));
         }
 
+    }
+
+    public static List<Cliente> importarClientesDesdeArchivoXML(String ruraArchivo){
+
+        try{
+            JAXBContext context = JAXBContext.newInstance(Clientes.class);
+
+            Unmarshaller unmarshaller= context.createUnmarshaller();
+            //leo el archivo y lo convierto a obCliente
+            File archivoXml=new File(ruraArchivo);
+            Clientes clientes= (Clientes)unmarshaller.unmarshal(archivoXml);
+
+            //devuelvo la lista
+            return  clientes.getClientes();
+
+
+        }catch (JAXBException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

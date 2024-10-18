@@ -3,16 +3,9 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import controlador.ControladorCilente;
-import controlador.ControladorPedido;
 import modelo.cliente.Cliente;
-import modelo.pedido.Ingrediente;
-import modelo.pedido.Pagable;
-import modelo.pedido.PagarTarjeta;
-import modelo.producto.Bebida;
-import modelo.producto.Pizza;
+
 import utilidades.GestorDeArchivo;
-import utilidades.ImportarXML;
 
 public class Pizzeria {
     public static void main(String[] args) {
@@ -51,19 +44,21 @@ public class Pizzeria {
         List<Cliente> clientes= GestorDeArchivo.leerCliente();
         clientes.forEach(System.out::println);
 
-    //FUNCION EXPONER CLIENTESXML
+    //FUNCION EXPORTAR CLIENTESXML
         List<Cliente> listaClientes= new ArrayList<>();
         listaClientes.add(new Cliente(1,"5235474Q","nico","calle x 12","652358896","nico@gmail.com","14563A", true));
         listaClientes.add(new Cliente(2, "22203344F", "María", "C/Sol 5", "678954321", "m.gonzalez@correo.com", "23456B", false));
         listaClientes.add(new Cliente(3, "33301234A", "Carlos", "Av. Libertad 3", "690123456", "c.lopez@correo.com", "34567C", true));
 
         String nombreArchivo= "clientes.xml";
-        GestorDeArchivo.exportarClienteAxml(listaClientes,nombreArchivo);
+       GestorDeArchivo.exportarClienteAxml(listaClientes,nombreArchivo);
+
+
 
     //Importar xml a objetos cliente
         String rutaArchivoXML="clientes.xml";
         //creo mi lista para almacenar los obj importados del xml
-        List<Cliente> listaClientes2= ImportarXML.importarClientesDesdeArchivoXML(rutaArchivoXML);
+        List<Cliente> listaClientes2= GestorDeArchivo.importarClientesDesdeArchivoXML(rutaArchivoXML);
         if(listaClientes2 !=null){
             for(Cliente c: listaClientes2){
                 System.out.println(c);
