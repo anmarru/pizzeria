@@ -1,38 +1,62 @@
 package modelo.pedido;
 
+import modelo.cliente.Cliente;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Pedido implements Pagable{
+public class Pedido {
 
     private List<LineaPedido> lineasPedido;
-    private long id;
-    private Date fecha;
+    private final long id;
+    private final Date fecha;
     private float precioTotal;
     private EstadoPedido estado;
+    private final Cliente cliente;
 
 
-    public Pedido( EstadoPedido estado) {
-
+    public Pedido( long id, Cliente cliente) {
+        this.id=id;
         this.fecha = new Date();
         this.precioTotal =0;
         this.lineasPedido= new ArrayList<>();
         this.estado= EstadoPedido.PENDIENTE;
+        this.cliente=cliente;
     }
-    
+
+    public Pedido(Pedido pedido){
+        this(pedido.id,pedido.cliente);
+    }
     
     
     @Override
     public String toString() {
-        return "Pedido [id=" + id + ", fecha=" + fecha + ", precioTotal=" + precioTotal + ", estado=" + estado + "]";
+        String info= "Pedido [id=" + id + ", fecha=" + fecha + ", precioTotal=" + precioTotal + ", estado=" + estado + "]\n";
+        for(LineaPedido l: lineasPedido){
+            info+=l.toString()+"\n";
+        }
+        return info;
     }
 
 
-    public void agregarLineaPedido(LineaPedido lineaPedido){
-        lineasPedido.add(lineaPedido);
-        this.precioTotal+= lineaPedido.getCantidad() * lineaPedido.getProducto().getPrecio();
+    public void agregarLineaPedido(LineaPedido nuevalineaPedido){
+        boolean lineaExistente= false;
+
+        for(LineaPedido linea:lineasPedido){
+
+            if(linea.getId()==nuevalineaPedido.getId()){
+                linea.aniadirCantidad(nuevalineaPedido.getCantidad());
+                lineaExistente=true;
+                break;
+            }
+        }
+        if(!lineaExistente){
+            lineasPedido.add(new LineaPedido(nuevalineaPedido));
+        }
+
+        precioTotal+=nuevalineaPedido.getCantidad()*nuevalineaPedido.getPrecio();
     
     }
 
@@ -48,17 +72,13 @@ public class Pedido implements Pagable{
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
+
 
     public float getPrecioTotal() {
         return precioTotal;
@@ -76,15 +96,6 @@ public class Pedido implements Pagable{
         this.estado = estado;
     }
 
-
-
-
-
-    @Override
-    public void pagar(double cantidad) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pagar'");
-    }
 
     
 

@@ -1,18 +1,20 @@
 package utilidades;
-
+import com.opencsv.*;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
 import modelo.cliente.Cliente;
 import modelo.cliente.Clientes;
+import modelo.pedido.Ingrediente;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.io.FileWriter;
 
 public class GestorDeArchivo {
 
@@ -89,5 +91,76 @@ public class GestorDeArchivo {
         return null;
     }
 
+    public static  void exportarIngredienteCSV(List<Ingrediente>listaDeIngredientes) {
 
+        try (CSVWriter writer = new CSVWriter(new FileWriter("ficheroIngredientes.CSV"))) {
+
+            String[] encabezado = {"NOMBRE","ALERGENOS", "ID"};
+            writer.writeNext(encabezado);
+
+            for (Ingrediente ig : listaDeIngredientes) {
+                //lista alergenos a cadena separados por comas
+                String alergenos = String.join(",", ig.getAlergenos());
+                String[] datosIngrediente = {ig.getNombre(), alergenos,String.valueOf(ig.getId()) };
+                //escribo datos en ingrediente
+                writer.writeNext(datosIngrediente);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static List<Ingrediente> importarIngredientesDesdeCSV(String nombreArchivo) {
+
+        List<Ingrediente> ingredientes= new ArrayList<>();
+
+        try (
+                CSVReader reader= new CSVReaderBuilder(new FileReader(nombreArchivo))
+                .withCSVParser(new CSVParserBuilder().withSeparator(',').build())//separador
+                .withSkipLines(1)//me salto la primera linea q es el encabezado
+                .build()){
+                String[] linea;
+                //leo cada linea del archivoCSV
+
+            while ((linea = reader.readNext()) !=null){
+
+                if(linea.length==0 || linea[0].trim().isEmpty()){
+                    continue;
+                }
+
+                if(linea.length !=3){
+                    System.out.println("linea sin campos necesarios ");
+                }
+
+                //parseo alergenos id y nombre
+                //creo la lista de alergenos, si esta vacia creo la lista vacia, y si tiene alergenos creo una lista  los agrego y los separo con ,
+                String nombre= linea[0].replace("\"","").trim();//elimino comillas y espacios
+                List<String> alergenos= linea[1].isEmpty() ? new ArrayList<>() : Arrays.asList(linea[1].split(","));
+                String idStr= linea[2].replace("\"","").trim();//elimino las comillas y los espacios
+
+                int id;
+                try{
+                    id=Integer.parseInt(idStr);
+                }catch (NumberFormatException e){
+                    System.out.println("error ie id no es numero valiso");
+                    continue;
+                }
+
+
+                //creo el objeto ingrediente y lo agrego a la lista
+                Ingrediente ingrediente= new Ingrediente(nombre, alergenos, id);
+                ingredientes.add(ingrediente);
+
+                System.out.println("Importando...");
+            }
+
+
+        }catch (IOException  | CsvValidationException e){
+            e.printStackTrace();
+        }
+        return ingredientes;
+    }
 }

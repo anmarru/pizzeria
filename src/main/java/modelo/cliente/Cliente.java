@@ -56,10 +56,12 @@ public class Cliente implements Pagable {
     @Override
     public String toString() {
         return "Cliente [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono="
-                + telefono + ", email=" + email + ", password=" + password + ", pedidos=" + pedidos  +" ,esAdministrador "+ esAdministrador+ "]";
+                + telefono + ", email=" + email + ", password=" + password + ", pedidos=" + pedidos  +" ,esAdministrador "+ esAdministrador+ "]\n";
     }
 
-
+    public void agregarPedidos(Pedido pedido){
+        pedidos.add(pedido);
+    }
 
     public void setId(long id) {
         this.id = id;

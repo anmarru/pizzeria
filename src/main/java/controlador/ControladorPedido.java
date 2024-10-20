@@ -1,99 +1,110 @@
 package controlador;
 
-import modelo.cliente.Cliente;
 import modelo.pedido.EstadoPedido;
 import modelo.pedido.LineaPedido;
 import modelo.pedido.Pagable;
 import modelo.pedido.Pedido;
-import modelo.producto.Producto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorPedido {
 
-    private static Pedido pedido;
-    private static Cliente cliente;
+    private static ControladorPedido instancia;
 
-    public ControladorPedido(Cliente cliente){
-        this.cliente=cliente;
-    }
-    
-    public void finalizarPedido(Pagable pagable){
+    private Pedido pedidoactual;
+    private List<Pedido> pedidos;
 
-        if(cliente==null){
-            System.out.println("NO HAY USUARIO ");
-            return;
-        }
-        if(pedido==null){
-            System.out.println("No hay pedido ");
-            return;
-        }
-        pedido.setEstado(EstadoPedido.FINALIZADO);
-        System.out.println("EL ESTADO DEL PEDIDO ES: "+pedido.getEstado());
-
-        pagable.pagar(pedido.getPrecioTotal());
-
+    public ControladorPedido(){
+        this.pedidoactual=null;
+        this.pedidos= new ArrayList<>();
     }
 
-
-
-    public void agregarLineaPedido(Producto producto, int cantidad) {
-        if (cliente == null) {
-            System.out.println("NO SE HA REGISTADO NINGUN USUARIO ");
-            return;
+    public static ControladorPedido getInstance(){
+        if(instancia == null){
+            instancia= new ControladorPedido();
         }
-        if (pedido == null) {
-            crearNuevoPedido();
-        }
-
-        pedido.agregarLineaPedido(new LineaPedido(cantidad, producto));
+        return instancia;
     }
 
-    private void crearNuevoPedido() {
-        pedido = new Pedido(EstadoPedido.PENDIENTE);
+    private void crearNuevoPedido(Pedido pedido) {
+        pedidoactual=pedido;
     }
 
-    public void cancelarPedido() {
-        if (cliente == null) {
-            System.out.println("NO HAY USUARIO..");
-            return;
+    public boolean agregarLineaPedido(LineaPedido lineaPedido) {
+        if (pedidoactual == null) {
+            System.out.println("No hay pedidos para añadir linea ");
+            return false;
         }
-        if (pedido == null) {
-            System.out.println("NO HAY PEDIDO.. ");
-            return;
-        }
-        pedido.setEstado(EstadoPedido.CANCELADO);
 
-        System.out.println("EL ESTADO DEL PEDIDO ES: " + pedido.getEstado());
+        pedidoactual.agregarLineaPedido(lineaPedido);
+        return true;
     }
 
-    public void entregarPedido(){
-        if(cliente==null){
-            System.out.println("NO HAY USUARIO ");
-            
+    public boolean finalizarPedido(Pagable pagable){
+
+        if(pedidoactual.getLineasPedido().isEmpty()|| pedidoactual==null){
+            System.out.println("no hay lineas en el pedido ");
         }
-        if(pedido==null){
-            System.out.println("NO HAY PEDIDO ");
-            return;
-        }
-        pedido.setEstado(EstadoPedido.ENTREGADO);
-        System.out.println("PEDIDO  "+ pedido.getEstado());
+        pagable.pagar(pedidoactual.getPrecioTotal());
+        pedidoactual.setEstado(EstadoPedido.FINALIZADO);
+        pedidos.add(pedidoactual);
+        //pedidoactual= null;
+        return  true;
+
     }
 
 
 
-    public static Pedido getPedido() {
-        return pedido;
+    public Pedido cancelarPedido() {
+        if(pedidoactual == null){
+            System.out.println("No hay pedidos activos ");
+
+        }
+
+        if (pedidoactual.getEstado() == EstadoPedido.ENTREGADO){
+            System.out.println("Pedido entregado , no se puede cancelar ");
+
+        }
+
+        pedidoactual.setEstado(EstadoPedido.CANCELADO);
+        System.out.println("Pedido camcelado ");
+        return pedidoactual;
+    }
+
+    public Pedido entregarPedido(){
+       if(pedidoactual== null || pedidoactual.getEstado() != EstadoPedido.FINALIZADO){
+           System.out.println("No hay pedido finalizado para ser entregado ");
+
+       }
+       pedidoactual.setEstado(EstadoPedido.ENTREGADO);
+        System.out.println("Pedido entregado");
+
+        return pedidoactual;
     }
 
 
-
-    public static void setPedido(Pedido pedido) {
-        ControladorPedido.pedido = pedido;
+    public static ControladorPedido getInstancia() {
+        return instancia;
     }
 
-    
+    public static void setInstancia(ControladorPedido instancia) {
+        ControladorPedido.instancia = instancia;
+    }
 
+    public Pedido getPedidoactual() {
+        return pedidoactual;
+    }
 
+    public void setPedidoactual(Pedido pedidoactual) {
+        this.pedidoactual = pedidoactual;
+    }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 
-    
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }

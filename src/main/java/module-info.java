@@ -8,6 +8,7 @@ module andrea {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.xml.bind;
+    requires com.opencsv;
 
     // Exportaciones y aperturas
     opens modelo.cliente to java.xml.bind;

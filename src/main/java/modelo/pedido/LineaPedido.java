@@ -4,23 +4,24 @@ import modelo.producto.Producto;
 public class LineaPedido {
     private int id;
     private int cantidad;
-    private int contador_lineas;
     private Producto producto;
     
 
-    public LineaPedido(int cantidad, Producto producto) {
-        this.id = contador_lineas++;
+    public LineaPedido(int id,int cantidad, Producto producto) {
+        this.id = id;
         this.cantidad = cantidad;
         this.producto=producto;
         
     }
 
+    public LineaPedido(LineaPedido nuevalineaPedido) {
+        this(nuevalineaPedido.id, nuevalineaPedido.cantidad, nuevalineaPedido.producto);
+    }
 
-    
 
     @Override
     public String toString() {
-        return "LineaPedido [id=" + id + ", cantidad=" + cantidad + ", producto=" + producto + "]";
+        return "LineaPedido [id=" + id + ", cantidad=" + cantidad + ", producto=" + producto + getPrecio()+ "]";
     }
 
 
@@ -45,16 +46,9 @@ public class LineaPedido {
         this.cantidad = cantidad;
     }
 
-
-    public int getContador_lineas() {
-        return contador_lineas;
+    public void aniadirCantidad(int cantidad){
+        this.cantidad+=cantidad;
     }
-
-
-    public void setContador_lineas(int contador_lineas) {
-        this.contador_lineas = contador_lineas;
-    }
-
 
     public Producto getProducto() {
         return producto;
@@ -65,6 +59,9 @@ public class LineaPedido {
         this.producto = producto;
     }
 
+    public double getPrecio(){
+        return cantidad * producto.getPrecio();
+    }
     
     
 

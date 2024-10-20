@@ -3,7 +3,7 @@ package modelo.producto;
 public class Bebida extends Producto{
     
     
-    public Size size;
+    public final Size size;
     
     public Bebida(int id, String nombre, double precio, Size size) {
         super(id, nombre, precio);
@@ -15,9 +15,6 @@ public class Bebida extends Producto{
         return size;
     }
 
-    public void setSize(Size size) {
-        this.size = size;
-    }
 
     @Override
     public String toString() {

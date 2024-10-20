@@ -1,17 +1,20 @@
 package modelo.producto;
 
+import java.util.Objects;
+
 public abstract class Producto {
     
     
-    protected int id;
+    protected final int id;
     protected String nombre;
     protected double precio;
-    protected int contador_producto;
+
 
     public Producto(int id, String nombre, double precio) {
+        this.id=id;
         this.nombre = nombre;
         this.precio = precio;
-        this.id = contador_producto++;
+
     }
 
     
@@ -23,10 +26,6 @@ public abstract class Producto {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -45,17 +44,16 @@ public abstract class Producto {
         this.precio = precio;
     }
 
-    public int getContador_producto() {
-        return contador_producto;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return id == producto.id;
     }
 
-    public void setContador_producto(int contador_producto) {
-        this.contador_producto = contador_producto;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
-
-   
-
-    
-
-    
 }

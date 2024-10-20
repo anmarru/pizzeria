@@ -1,19 +1,21 @@
 package modelo.pedido;
 
+import com.opencsv.bean.CsvBindByName;
+
 import java.util.List;
 
-import modelo.producto.Producto;
-
 public class Ingrediente {
-    
+    @CsvBindByName(column = "NOMBRE")
     private String nombre;
+    @CsvBindByName(column = "ALERGENOS")
     private List<String> alergenos;
-    private long id;
+    @CsvBindByName(column = "ID")
+    private int id;
 
     public Ingrediente() {
     }
 
-    public Ingrediente(String nombre, List<String> alergenos) {
+    public Ingrediente(String nombre, List<String> alergenos,int id) {
         this.nombre = nombre;
         this.alergenos = alergenos;
         this.id = id;
