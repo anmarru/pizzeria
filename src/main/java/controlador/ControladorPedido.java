@@ -27,7 +27,7 @@ public class ControladorPedido {
         return instancia;
     }
 
-    private void crearNuevoPedido(Pedido pedido) {
+  public void crearNuevoPedido(Pedido pedido) {
         pedidoactual=pedido;
     }
 
@@ -68,7 +68,8 @@ public class ControladorPedido {
         }
 
         pedidoactual.setEstado(EstadoPedido.CANCELADO);
-        System.out.println("Pedido camcelado ");
+        System.out.println("Pedido cancelado ");
+
         return pedidoactual;
     }
 

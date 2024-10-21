@@ -92,20 +92,22 @@ public class Pizzeria {
         PagarEfectivo pagoEfectivo= new PagarEfectivo();
         PagarTarjeta pagarTarjeta= new PagarTarjeta();
 
-
-        controladorCilente.finalizarPedido(pagarTarjeta);
         //finalizo pedido
+        controladorCilente.finalizarPedido(pagarTarjeta);
+        //pedido estado finalizado
         System.out.println(controladorCilente.getControladorPedido().getPedidoactual());
-        //recibe pedido
-        controladorCilente.recibirPedido();
-        System.out.println(controladorCilente.getClienteActual());
 
-        //añado otro pedido
-        controladorCilente.agregarLieaPedido(lineaPedido4);
-        System.out.println(controladorCilente.getControladorPedido().getPedidoactual());
+        //cancelo pedido para reiniciar un nuevo  pedido
         controladorCilente.cancelarPedido();
+
+        //añado listas al pedido
+        controladorCilente.agregarLieaPedido(lineaPedido1);
+        System.out.println(controladorCilente.getControladorPedido().getPedidoactual());
+        controladorCilente.finalizarPedido(pagoEfectivo);
+        controladorCilente.recibirPedido();
         System.out.println(controladorCilente.getControladorPedido().getPedidoactual());
 
+        System.out.println("-------------------------------ARCHIVOS-----------------------------------------------------------\n");
 
 
 
@@ -142,10 +144,10 @@ public class Pizzeria {
 
         //exportar ingredientes a csv
 
-        List<Ingrediente> lista_ingredientes= new ArrayList<>();
-        lista_ingredientes.add(new Ingrediente("peperoni",List.of("sulfito","lacteo"),1));
+       /* List<Ingrediente> lista_ingredientes= new ArrayList<>();
+        lista_ingredientes.add(new Ingrediente("peperoni",List.of("sulfito,lacteo"),1));
         lista_ingredientes.add(new Ingrediente("queso",List.of("lacteo"),2));
-        lista_ingredientes.add(new Ingrediente("piña",List.of("bromelia"," histamina"),3));
+        lista_ingredientes.add(new Ingrediente("piña",List.of("bromelia, histamina"),3));
         lista_ingredientes.add(new Ingrediente("pechuga de pollo",List.of("aves"),4));
         lista_ingredientes.add(new Ingrediente("champiñones",List.of(),5));
 
@@ -154,7 +156,7 @@ public class Pizzeria {
         GestorDeArchivo.importarIngredientesDesdeCSV("ficheroIngredientes.CSV");
         for (Ingrediente ingrediente: lista_ingredientes){
             System.out.println(ingrediente);
-        }
+        }*/
 
 
 

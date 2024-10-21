@@ -96,12 +96,12 @@ public class GestorDeArchivo {
     }
 
     public static  void exportarIngredienteCSV(List<Ingrediente>listaDeIngredientes) {
-            List<Ingrediente>listaIngredientes;
+
         try (PrintWriter pw = new PrintWriter("Ingredientes.csv")) {
-            StatefulBeanToCsv<Ingrediente> beanToCsv = new
-                    StatefulBeanToCsvBuilder<Ingrediente>(
-                    pw).build();
+
+            StatefulBeanToCsv<Ingrediente> beanToCsv = new StatefulBeanToCsvBuilder<Ingrediente>(pw).build();
             beanToCsv.write(listaDeIngredientes);
+
         } catch (FileNotFoundException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
             e.printStackTrace();
         }
