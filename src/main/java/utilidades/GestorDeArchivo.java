@@ -1,6 +1,10 @@
 package utilidades;
 import com.opencsv.*;
 import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import com.opencsv.exceptions.CsvValidationException;
 import modelo.cliente.Cliente;
 import modelo.cliente.Clientes;
@@ -92,8 +96,17 @@ public class GestorDeArchivo {
     }
 
     public static  void exportarIngredienteCSV(List<Ingrediente>listaDeIngredientes) {
+            List<Ingrediente>listaIngredientes;
+        try (PrintWriter pw = new PrintWriter("Ingredientes.csv")) {
+            StatefulBeanToCsv<Ingrediente> beanToCsv = new
+                    StatefulBeanToCsvBuilder<Ingrediente>(
+                    pw).build();
+            beanToCsv.write(listaDeIngredientes);
+        } catch (FileNotFoundException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
+            e.printStackTrace();
+        }
+       /* try (CSVWriter writer = new CSVWriter(new FileWriter("ficheroIngredientes.CSV"))) {
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter("ficheroIngredientes.CSV"))) {
 
             String[] encabezado = {"NOMBRE","ALERGENOS", "ID"};
             writer.writeNext(encabezado);
@@ -109,7 +122,7 @@ public class GestorDeArchivo {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 

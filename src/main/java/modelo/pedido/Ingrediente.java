@@ -1,5 +1,6 @@
 package modelo.pedido;
 
+import com.opencsv.bean.CsvBindAndSplitByName;
 import com.opencsv.bean.CsvBindByName;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public class Ingrediente {
     @CsvBindByName(column = "NOMBRE")
     private String nombre;
-    @CsvBindByName(column = "ALERGENOS")
+    @CsvBindAndSplitByName(column = "ALERGENOS", writeDelimiter = ",", elementType = String.class)
     private List<String> alergenos;
     @CsvBindByName(column = "ID")
     private int id;
